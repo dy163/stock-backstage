@@ -180,7 +180,7 @@ export default {
         this.dialogFormVisible = false
         this.handleAdminUserList()
       } catch (error) {
-        this.$message.error('不通过失败')
+        this.$message.error('不通过')
       }
     },
     // 分页

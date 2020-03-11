@@ -86,6 +86,7 @@ export default {
     handlePreview (file) {
       console.log(file);
     },
+    // 添加要闻
     async handleRelease () {
       try {
         const release = this.articleForm
@@ -100,7 +101,7 @@ export default {
           this.$message.error('添加失败')
         }
       } catch (error) {
-        
+        this.$message.error('添加失败,请重新登录')
       }
     }
   },

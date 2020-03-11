@@ -51,10 +51,7 @@ export default {
 
   },
   methods: {
-    handleSendCode () {
-
-    },
-
+    // 登录
     async handleLogin () {
       try {
         const formData = new FormData()
