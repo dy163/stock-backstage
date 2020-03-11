@@ -8,47 +8,47 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/login')
+    component: () => import('@/page/login')
   },
   {
     path: '/',
-    component: () => import('@/views/layout'),
+    component: () => import('@/page/layout'),
     children: [
       // {
       //   name: 'home',
       //   path: '', // 匹配到layout的直接默认
-      //   component: () => import('@/views/home')
+      //   component: () => import('@/page/home')
       // },
       {
         name: 'administer',
         // path: '/administer',
         path: '',
-        component: () => import('@/views/administer')
+        component: () => import('@/page/administer')
       },
       {
         name: 'information',
         path: '/information',
-        component: () => import('@/views/information')
+        component: () => import('@/page/information')
       },
       {
         name: 'verif',
         path: '/verif',
-        component: () => import('@/views/verif')
+        component: () => import('@/page/verif')
       },
       {
         name: 'increase',
         path: '/increase',
-        component: () => import('@/views/increase')
+        component: () => import('@/page/increase')
       },
       {
         name: 'settings',
         path: '/settings',
-        component: () => import('@/views/settings')
+        component: () => import('@/page/settings')
       },
       {
-        name: 'time',
-        path: '/time',
-        component: () => import('@/views/time')
+        name: 'closing-time',
+        path: '/closing-time',
+        component: () => import('@/page/closing-time')
       }
     ]
   }

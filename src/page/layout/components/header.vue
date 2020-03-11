@@ -11,7 +11,7 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人设置</el-dropdown-item>
+          <el-dropdown-item @click.native="handleSetting">个人设置</el-dropdown-item>
           <el-dropdown-item @click.native="handleRemove">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -31,6 +31,7 @@ export default {
     }
   },
   methods: {
+    // 退出
     handleRemove () {
       this.$confirm('确认退出?', '退出提示', {
         confirmButtonText: '确定',
@@ -54,6 +55,10 @@ export default {
           message: '已取消退出'
         })
       })
+    },
+    // 跳转设置
+    handleSetting () {
+      this.$router.push('settings')
     }
   }
 

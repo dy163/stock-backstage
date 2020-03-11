@@ -22,7 +22,7 @@
       <el-menu-item index="/increase">
         <span slot="title">股票信息</span>
       </el-menu-item>
-      <el-menu-item index="/time">
+      <el-menu-item index="/closing-time">
         <span slot="title">时间列表</span>
       </el-menu-item>
       <el-menu-item index="/information">
