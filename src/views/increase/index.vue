@@ -163,7 +163,7 @@ export default {
         this.totalCount = res.data.result.total
       } catch (error) {
         this.$message({
-          message: '警告哦，修改失败',
+          message: '警告哦，获取失败',
           type: 'warning'
         })
       }
@@ -183,7 +183,7 @@ export default {
         this.dialogFormVisible = false
         this.form.name = ''
       } catch (error) {
-
+        this.$message.error('修改失败!')
       }
     },
     // 添加股票
@@ -201,7 +201,7 @@ export default {
         this.increaseInline.cir_capital = '',
         this.handleStockGetAllList()
       } catch (error) {
-        q
+        this.$message.error('添加失败!')
       }
     },
     // 退市操作q
@@ -242,7 +242,7 @@ export default {
         this.update.symbol = ''
         this.dialogToUpdate = false
       } catch (error) {
-        
+        this.$message.error('更新股票信息失败!')
       }
       
     },

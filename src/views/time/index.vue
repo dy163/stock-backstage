@@ -172,7 +172,7 @@ export default {
         this.tableTime = res.data.result.list
         this.totalCount = res.data.result.total
       } catch (error) {
-
+        this.$message.error('获取时间列表失败!请重新登录')
       }
     },
     // 添加
@@ -186,7 +186,7 @@ export default {
         this.formInline.remark = ''
         this.handlecloseDateGetList() // 更新列表
       } catch (error) {
-
+        this.$message.error('添加失败!')
       }
     },
     // 批量添加
@@ -201,7 +201,7 @@ export default {
         await batchAdd(arr)
         this.handlecloseDateGetList()
       } catch (error) {
-
+        this.$message.error('批量添加失败!')
       }
     },
     // 增加
@@ -220,9 +220,6 @@ export default {
         this.newarray.splice(index, 1)
       }
     },
-    submit () {
-
-    },
     // 修改闭市备注
     handleCloseDateEdit (q) {
       this.dialogFormVisible = true
@@ -238,7 +235,7 @@ export default {
         this.edit.name = ''
         this.handlecloseDateGetList() // 更新列表
       } catch (error) {
-
+        this.$message.error('修改闭市备注失败!')
       }
     },
     // 删除
