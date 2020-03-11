@@ -89,12 +89,28 @@
               <el-button type="primary" @click="handleSuccess">确 定</el-button>
             </div>
           </el-dialog>
+          <div>
+            <el-pagination
+              :current-page="page"
+              background
+              layout="prev, pager, next"
+              :page-size="pageSize"
+              :total="totalCount"
+              @current-change="handleCurrentChange">
+            </el-pagination>
+          </div>
        </el-card>
    </div>
 </template>
 
 <script>
-import { stockGetAllList, setOpenPrice, stockAdd, stockDelete, stockUpdate } from '@/api/stock'
+import { 
+  stockGetAllList, 
+  setOpenPrice, 
+  stockAdd, 
+  stockDelete, 
+  stockUpdate 
+} from '@/api/stock'
 
 export default {
   name: 'Increase',
@@ -105,6 +121,9 @@ export default {
       formLabelWidth: '120px',
       dialogToUpdate: false,
       state: '',
+      page: 1,  // 当前页数
+      pageSize: 3,  // 每页条数
+      totalCount: 0,  // 总数
       amend: {
         price: ''
       },
@@ -137,8 +156,11 @@ export default {
     async handleStockGetAllList () {
       try {
         const formData = new FormData()
+        formData.append('pageNum', this.page)
+        formData.append('pageSize', this.pageSize)
         const res = await stockGetAllList(formData)
-        this.increase = res.data.result
+        this.increase = res.data.result.list
+        this.totalCount = res.data.result.total
       } catch (error) {
         this.$message({
           message: '警告哦，修改失败',
@@ -223,6 +245,11 @@ export default {
         
       }
       
+    },
+    handleCurrentChange (page) {
+      this.page = page
+      // 重新加载
+      this.handleStockGetAllList()
     }
   },
   watch: {}

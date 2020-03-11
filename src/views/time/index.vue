@@ -98,11 +98,16 @@
                 <el-button type="primary" @click="handleEditSuccess">确 定</el-button>
                 </div>
             </el-dialog>
+          <div>
             <el-pagination
+              :current-page="page"
               background
               layout="prev, pager, next"
-              :total="1000">
+              :page-size="pageSize"
+              :total="totalCount"
+              @current-change="handleCurrentChange">
             </el-pagination>
+          </div>
        </el-card>
    </div>
 </template>
@@ -124,6 +129,9 @@ export default {
       dialogFormVisible: false,
       formLabelWidth: '120px',
       state: '',
+      page: 1,  // 当前页数
+      pageSize: 3,  // 每页条数
+      totalCount: 0,  // 总数
       formInline: {
         date: '',
         remark: ''
@@ -158,8 +166,11 @@ export default {
     async handlecloseDateGetList () {
       try {
         const formData = new FormData()
+        formData.append('pageNum', this.page)
+        formData.append('pageSize', this.pageSize)
         const res = await closeDateGetList(formData)
-        this.tableTime = res.data.result
+        this.tableTime = res.data.result.list
+        this.totalCount = res.data.result.total
       } catch (error) {
 
       }
@@ -251,6 +262,12 @@ export default {
           message: '已取消删除'
         })
       })
+    },
+    // 分页
+    handleCurrentChange (page) {
+      this.page = page
+      // 重新加载
+      this.handlecloseDateGetList()
     }
   },
   watch: {}
