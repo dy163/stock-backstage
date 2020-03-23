@@ -1,161 +1,84 @@
 import request from '@/utils/request'
 
 /**
- * 1.获取注册短信验证码
+ * 1、后台登录
+ * @param { userLogin } formData
  */
-export const getRegisterCode = (phone) => {
-  const formData = new FormData()
-  formData.append('phone', phone)
-  formData.append('status', 'register')
+export const userLogin = formData => {
   return request({
     method: 'POST',
-    url: '/user/getRegisterCode',
-    data: formData
-  })
-}
-/**
- * 2.校验注册短信验证码
- */
-export const identifyRegisterCode = (phone, code) => {
-  const formData = new FormData()
-  formData.append('phone', phone)
-  formData.append('code', code)
-  formData.append('status', 'register')
-  return request({
-    method: 'POST',
-    url: '/user/identifyRegisterCode',
-    data: formData
-  })
-}
-/**
- * 3.注册信息
- */
-export const register = formData => {
-  return request({
-    method: 'POST',
-    url: '/user/register',
+    url: '/master/adminUser/login',
     data: formData
   })
 }
 
 /**
- * 4.图片上传
+ * 2、添加后台管理员
+ * @param { userAdd } formData
  */
-export const uploadImg = (file)  => {
-  const formData = new FormData();
-  formData.append("file", file.file);
+export const userAdd = formData => {
   return request({
     method: 'POST',
-    url: '/file/uploadImg',
+    url: '/master/adminUser/add',
     data: formData
   })
 }
 
 /**
- * 5.账号（手机号或用户编号）密码登录
+ * 3、获取后台管理员列表
+ * @param { userGetList } formData
  */
-export const login = formData  => {
+export const userGetList = formData => {
   return request({
     method: 'POST',
-    url: '/user/login',
+    url: '/master/adminUser/getList',
     data: formData
   })
 }
 
 /**
- * 6.退出登录
+ * 4、修改管理员账号状态
+ * @param { userUpdate } formData
  */
-export const exit = ()  => {
+export const userUpdate = formData => {
   return request({
     method: 'POST',
-    url: '/user/exit'
+    url: '/master/adminUser/update',
+    data: formData
   })
 }
-
 /**
- * 7.获取修改密码短信验证码
+ * 5、获取前台用户
+ * @param { adminUserList } formData
  */
-export const getResetPaCode = formData  => {
+export const adminUserList = formData => {
   return request({
     method: 'POST',
-    url: '/user/getResetPaCode',
+    url: '/master/adminUser/getUserList',
     data: formData
   })
 }
 
 /**
- * 8.校验修改密码短信验证码
+ * 6、审核前台用户
+ * @param { userVerityUser } formData
  */
-export const identifyResetPaCode = formData  => {
+export const userVerityUser = formData => {
   return request({
     method: 'POST',
-    url: '/user/identifyResetPaCode',
+    url: '/master/adminUser/verityUser',
     data: formData
   })
 }
 
 /**
- * 9.修改密码
+ * 7、后台管理员退出登录
+ * @param { userExit } formData
  */
-export const resetPassword = formData  => {
+export const userExit = formData => {
   return request({
     method: 'POST',
-    url: '/user/resetPassword',
-    data: formData
-  })
-}
-
-/**
- * 10.获取修改手机号短信验证码
- */
-export const getUpdatePhoneCode = formData  => {
-  return request({
-    method: 'POST',
-    url: '/user/getUpdatePhoneCode',
-    data: formData
-  })
-}
-
-/**
- * 11.获取修改手机号短信验证码
- */
-export const updatePhone = formData  => {
-  return request({
-    method: 'POST',
-    url: '/user/updatePhone',
-    data: formData
-  })
-}
-
-/**
- * 12.更改头像（先走上传接口获取上传图片路径）
- */
-export const updateHeaderImg = formData  => {
-  return request({
-    method: 'POST',
-    url: '/user/updateHeaderImg',
-    data: formData
-  })
-}
-
-/**
- * 13.更新个人简介
- */
-export const updateIntro = formData  => {
-  return request({
-    method: 'POST',
-    url: '/user/updateIntro',
-    data: formData
-  })
-}
-
-/**
- * 14.获取用户信息
- */
-export const getUserInfo = formData  => {
-  return request({
-    method: 'POST',
-    url: '/user/getUserInfo',
+    url: '/master/adminUser/exit',
     data: formData
   })
 }

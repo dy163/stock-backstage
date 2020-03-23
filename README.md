@@ -1,4 +1,4 @@
-# move
+# stock-admin
 
 ## Project setup
 ```

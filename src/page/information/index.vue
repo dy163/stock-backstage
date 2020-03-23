@@ -1,113 +1,121 @@
 <template>
-  <div class="information">
-    <van-nav-bar title="资 讯" fixed />
-    <div>
-      <van-tabs
-        class="information-tabs"
-        v-model="active"
-        background="#20212A"
-        title-inactive-color="#fff"
-        title-active-color="#5794F0"
-        line-height="0"
-        sticky
-      >
-        <!-- 要闻 -->
-        <!-- <van-tab title="要闻" name="propelling"> -->
-        <van-tab title="要闻" name="propelling">
-          <FrontPageStory />
-          <!-- hot事件 -->
-          <Hot />
-          <!-- 下面热点列表 -->
-          <Foot />
-        </van-tab>
-        <!-- 公告 -->
-        <van-tab title="公告">
-          <Notice />
-        </van-tab>
-        <!-- 自选 -->
-        <van-tab title="自选">
-          <Free />
-        </van-tab>
-        <!-- 推送 -->
-        <van-tab title="推送" >
-          <Propelling />
-        </van-tab>
-      </van-tabs>
-    </div>
-    <!-- 底部导航 -->
-    <app-tabbar />
-  </div>
+  <div>
+    <el-card>
+      <div slot="header" class="header-box">
+        <span>要闻资讯-添加要闻</span>
+        <el-button size="small" type="primary" @click="handleRelease">发布</el-button>
+      </div>
+      <el-row>
+        <el-form ref="form" :model="articleForm" label-width="80px">
+          <div>
+            <el-form-item label="标题">
+              <el-input v-model="articleForm.title"></el-input>
+            </el-form-item>
+            <el-form-item label="要闻来源">
+              <el-input v-model="articleForm.resource"></el-input>
+            </el-form-item>
+            <el-form-item label="内容">
+              <quill-editor v-model="articleForm.content"
+                ref="myQuillEditor"
+                :options="editorOption"
+                @blur="onEditorBlur($event)"
+                @focus="onEditorFocus($event)"
+                @ready="onEditorReady($event)">
+              </quill-editor>
+            </el-form-item>
+          </div>
+          <div>
+            <el-form-item label="图片">
+              <el-upload
+                class="upload-demo"
+                action="/api/file/uploadImg"
+                :on-success="handleSuccess"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :file-list="fileList"
+                list-type="picture">
+                <el-button size="small" type="primary">点击上传</el-button>
+                <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
+              </el-upload>
+            </el-form-item>
+          </div>
+        </el-form>
+      </el-row>
+    </el-card>
+   </div>
 </template>
-
 <script>
-import FrontPageStory from "./components/frontPageStory.vue"; // 要闻
-import Hot from "./components/hot.vue"; // 热点事件
-import Foot from "./components/foot.vue"; // 要闻推送
-import Free from "./components/free.vue"; // 自选
-import Notice from "./components/notice.vue"; // 公告
-import Propelling from "./components/propelling.vue"; // 推送
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 
+import { quillEditor } from 'vue-quill-editor'
+
+import { newsAdd } from '@/api/information'
 export default {
-  name: "InformationIndex",
-  components: {
-    Hot,
-    Foot,
-    Free,
-    Notice,
-    FrontPageStory,
-    Propelling
-  },
-  data() {
+  name: 'InformationIndex',
+  data () {
     return {
-      active: "propelling"
-      // active: ""
-    };
+      articleForm: {
+        title: '',
+        content: '',
+        resource: '',
+        img: '',
+      },
+      editorOption: {},  // 富文本配置
+      dialogVisible: false,
+      fileList: []
+    }
   },
+  components: {
+    quillEditor
+  },
+  computed: {},
+  mounted () {},
   methods: {
-    
-  }
-};
+    async onEditorBlur () {},
+    async onEditorFocus () {},
+    async onEditorReady () {},
+    // 上传图片
+    handleSuccess (response, file, fileList) {
+      this.articleForm.img = file.response.result.slice(7)
+    },
+    handleRemove (file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview (file) {
+      console.log(file);
+    },
+    // 添加要闻
+    async handleRelease () {
+      try {
+        const release = this.articleForm
+        const res = await newsAdd(release)
+        if(res.data.status) {
+          this.$message({
+            message: '添加要闻成功',
+            type: 'success'
+          })
+          this.articleForm = ''
+        } else {
+          this.$message.error('添加失败')
+        }
+      } catch (error) {
+        this.$message.error('添加失败,请重新登录')
+      }
+    }
+  },
+  watch: {}
+}
 </script>
 
 <style lang="less" scoped>
-.van-nav-bar {
-  background-color: #20212a;
-  .nav-img {
-    margin-left: 18px;
-    width: 18px;
-    vertical-align: middle;
-  }
+.header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.van-tab__pane {
-  color: #fff;
-}
-.information-tabs {
-  margin-bottom: 50px;
-  /deep/.van-ellipsis {
-    font-size: 15px;
-    font-family: PingFangSC-Medium, PingFangSC;
-    font-weight: 500;
-  }
-  /deep/.van-tabs__wrap {
-    top: 46px;
-    background-color: #20212a;
-  }
-  /deep/ .van-tabs__content {
-    margin-top: 46px;
-  }
-  /deep/.van-tabs__nav {
-    margin-right: 130px;
-  }
-}
-.van-tabbar-item__text {
-  height: 14px;
-  font-size: 10px;
-  font-family: PingFangSC;
-  font-weight: 500;
-  line-height: 14px;
-}
-.van-tabbar-item__icon {
-  width: 18px;
-  height: 18px;
+.el-form {
+  display: flex;
 }
 </style>

@@ -1,221 +1,121 @@
 import request from '@/utils/request'
 
 /**
- * 15.获取股票列表
+ * 8、设置开盘价
+ * @param { setOpenPrice } formData
  */
-export const getList = formData => {
+export const setOpenPrice = formData => {
   return request({
     method: 'POST',
-    url: '/stock/getList',
+    url: '/master/setting/setOpenPrice',
     data: formData
   })
 }
 
 /**
- * 16.添加自选股
+ * 9、添加闭市时间
+ * @param { closeDate } formData
  */
-export const mySelectStockAdd = formData => {
+export const closeDate = formData => {
+  return request({
+    method: 'POST',
+    url: '/master/closeDate/add',
+    data: formData
+  })
+}
+
+/**
+ * 10、批量添加闭市时间
+ * @param { batchAdd } JSON
+ */
+export const batchAdd = digitGroup => {
+  return request({
+    method: 'POST',
+    url: '/master/closeDate/batchAdd',
+    data: digitGroup
+  })
+}
+
+/**
+ * 11、获取闭市时间列表
+ * @param { closeDateGetList } formData
+ */
+export const closeDateGetList = formData => {
+  return request({
+    method: 'POST',
+    url: '/master/closeDate/getList',
+    data: formData
+  })
+}
+
+/**
+ * 12、修改闭市时间备注
+ * @param { closeDateEdit } formData
+ */
+export const closeDateEdit = formData => {
+  return request({
+    method: 'POST',
+    url: '/master/closeDate/edit',
+    data: formData
+  })
+}
+
+/**
+ * 13、删除闭市时间
+ * @param { closeDateDelete } formData
+ */
+export const closeDateDelete = formData => {
+  return request({
+    method: 'POST',
+    url: '/master/closeDate/delete',
+    data: formData
+  })
+}
+
+/**
+ * 14、添加股票
+ * @param { stockAdd } JSON
+ */
+export const stockAdd = increaseInline => {
+  return request({
+    method: 'POST',
+    url: '/master/stock/add',
+    data: increaseInline
+  })
+}
+
+/**
+ * 15、查询所有股票（包括退市的）
+ * @param { stockGetAllList } formData
+ */
+export const stockGetAllList = formData => {
+  return request({
+    method: 'POST',
+    url: '/master/stock/getAllList',
+    data: formData
+  })
+}
+
+/**
+ * 16、更新股票信息（只有名称类信息）
+ * @param { stockUpdate } JSON
+ */
+export const stockUpdate = ToUpdate => {
     return request({
       method: 'POST',
-      url: '/mySelectStock/add',
-      data: formData
+      url: '/master/stock/update',
+      data: ToUpdate
     })
-  }
+}
 
 /**
- * 17.获取自选股列表
+ * 17、股票退市
+ * @param { stockDelete } formData
  */
-export const mySelectStockGetList = formData => {
+export const stockDelete = formData => {
   return request({
     method: 'POST',
-    url: '/mySelectStock/getList',
+    url: '/master/stock/delete',
     data: formData
-  })
-}
-
-/**
- * 18.删除自选股
- */
-export const mySelectStockDelete = formData => {
-  return request({
-    method: 'POST',
-    url: '/mySelectStock/delete',
-    data: formData
-  })
-}
-
-/**
- * 19.查询账户信息
- */
-export const accountGetAccount = formData => {
-  return request({
-    method: 'POST',
-    url: '/account/getAccount',
-    data: formData
-  })
-}
-
-/**
- * 20.根据关键词搜索股票
- */
-export const searchStock = formData => {
-  return request({
-    method: 'POST',
-    url: '/stock/searchStock',
-    data: formData
-  })
-}
-
-/**
- * 21.添加搜索记录
- */
-export const searchAdd = formData => {
-  return request({
-    method: 'POST',
-    url: '/search/add',
-    data: formData
-  })
-}
-
-/**
- * 22.获取搜索记录列表
-*/
-export const searchGetList = formData => {
-  return request({
-    method: 'POST',
-    url: '/search/getList',
-    data: formData
-  })
-}
-
-/**
- * 23.清空搜索记录列表
-*/
-export const searchClearList = formData => {
-  return request({
-    method: 'POST',
-    url: '/search/clearList',
-    data: formData
-  })
-}
-
-/**
- * 24.获取持仓股票成功
-*/
-export const myBuyStockGetList = formData => {
-  return request({
-    method: 'POST',
-    url: '/myBuyStock/getList',
-    data: formData
-  })
-}
-
-/**
- * 25.获取资金流水列表
-*/
-export const fundFlowGetList = formData => {
-  return request({
-    method: 'POST',
-    url: '/fundFlow/getList',
-    data: formData
-  })
-}
-
-/**
- * 26.获取交割单列表
-*/
-export const deliveryOrderGetList = formData => {
-  return request({
-    method: 'POST',
-    url: '/deliveryOrder/getList',
-    data: formData
-  })
-}
-
-/**
- * 39.获取历史委托查询列表
-*/
-export const entrustHistory = formData => {
-  return request({
-    method: 'POST',
-    url: '/entrust/history',
-    data: formData
-  })
-}
-
-/**
- * 40.获取今日委托查询列表
-*/
-export const entrustTodayGetList = formData => {
-  return request({
-    method: 'POST',
-    url: '/entrust/today',
-    data: formData
-  })
-}
-
-/**
- * 41.获取历史成交列表
-*/
-export const bargainHistory = formData => {
-  return request({
-    method: 'POST',
-    url: '/bargain/history',
-    data: formData
-  })
-}
-
-/**
- * 42.获取历史成交列表
-*/
-export const bargainToday = formData => {
-  return request({
-    method: 'POST',
-    url: '/bargain/today',
-    data: formData
-  })
-}
-
-/**
- * 45.获取委托价格列表(表单)
-*/
-export const getPriceList = params => {
-  return request({
-    method: 'POST',
-    url: '/entrust/getPriceList',
-    data: params
-  })
-}
-
-/**
- * 46.买入委托接口（json）
-*/
-export const entrustBail = query => {
-  return request({
-    method: 'POST',
-    url: '/entrust/buy',
-    data: query
-  })
-}
-
-/**
- * 47.卖出委托接口（json）
-*/
-export const entrustSell = query => {
-  return request({
-    method: 'POST',
-    url: '/entrust/sell',
-    data: query
-  })
-}
-
-/**
- * 48.卖出委托接口（表单）
-*/
-export const entrustRevoke = query => {
-  return request({
-    method: 'POST',
-    url: '/entrust/revoke',
-    data: query
   })
 }
