@@ -1,15 +1,73 @@
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
-html,
 body {
-  height: 100%;
+  background-color: #20212A;
 }
-a {
-  text-decoration: none;
-  color: blue;
+.van-hairline--top-bottom::after,
+.van-hairline-unset--top-bottom::after {
+  border: #20212A;
 }
-.ql-editor {
-  height: 660px !important;
+.van-cell-group {
+  background-color: #20212A;
+}
+.van-cell {
+  color: #fff;
+  background-color: #353641;
+  padding: 0 16px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 50px;
+  line-height: 50px;
+}
+.van-field__control {
+  color: #fff;
+}
+.van-nav-bar__title {
+  font-size: 17px;
+  font-family: PingFangSC;
+  font-weight: 500;
+  color: #ffffff;
+}
+.van-toast--text {
+  color: #fff;
+  height: 35px;
+  background-color: #000;
+}
+.van-nav-bar {
+  background-color: #20212A;
+}
+.van-nav-bar .van-icon {
+  color: #fff;
+}
+.van-hairline--bottom::after {
+  border-bottom: 2px solid #14151C;
+}
+.van-nav-bar__title {
+  font-size: 17px;
+  font-family: PingFangSC;
+  font-weight: 500;
+  color: #ffffff;
+}
+.van-icon-arrow-left {
+  font-size: 16px;
+}
+.van-button {
+  border: 0;
+}
+.van-dialog {
+  background: #20212a;
+  color: #fff;
+}
+.van-dialog .van-button {
+  background: #20212a;
+  border: 0;
+  color: #fff;
+}
+.van-dialog .van-hairline--top::after {
+  border-top-width: 0;
+}
+.van-dialog [class*=van-hairline]::after {
+  border: 0;
 }

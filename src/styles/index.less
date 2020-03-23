@@ -1,14 +1,82 @@
 * {
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
-html, body {
-    height: 100%;
+body{
+    background-color: #20212A;
 }
-a {
-    text-decoration: none;
-    color: blue;
+.van-hairline--top-bottom::after, 
+.van-hairline-unset--top-bottom::after {
+    // border-width: 0;
+    border: #20212A;
 }
-.ql-editor {
-    height: 660px !important;
+// 输入框的圆角问题
+.van-cell-group {
+    background-color: #20212A;
+}
+.van-cell {
+    color: #fff;
+    background-color:#353641;
+    padding: 0 16px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    height: 50px;
+    line-height: 50px;
+}
+// 输入框的圆角问题
+.van-field__control {
+    color: #fff;
+}
+.van-nav-bar__title {   
+    font-size:17px;
+    font-family:PingFangSC;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+}
+// 轻提示文本得样式
+.van-toast--text {
+    color: #fff;
+    height: 35px;
+    background-color: #000;
+}
+// 头部导航样式
+.van-nav-bar {
+    background-color: #20212A;
+}
+.van-nav-bar .van-icon {
+    color: #fff;
+}
+.van-hairline--bottom::after {
+    border-bottom: 2px solid #14151C;
+}
+.van-nav-bar__title {
+    font-size:17px;
+    font-family:PingFangSC;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+}
+.van-icon-arrow-left {
+    font-size: 16px;
+}
+
+// 按钮边框样式
+.van-button {
+    border: 0;
+}
+
+// van-dialog样式
+.van-dialog {
+    background: rgba(32, 33, 42, 1);
+    color: #fff;
+    .van-button {
+        background: rgba(32, 33, 42, 1);
+        border: 0;
+        color: #fff;
+    }
+    .van-hairline--top::after {
+        border-top-width: 0
+    }
+    [class*=van-hairline]::after {
+        border: 0;
+    }
 }
